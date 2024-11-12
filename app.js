@@ -16,6 +16,7 @@ const session = require('express-session');
 const MongoStore=require('connect-mongo');
 const flash= require('connect-flash');
 const passport=require("passport");
+const Listing = require("./models/listing.js");
 
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
@@ -63,10 +64,7 @@ const sessionOptions={
     },
  };
 
- app.get("/",async(req,res)=>{
-    const lists = await Listing.find();
-    res.render("listings/index.ejs",{lists});
- });
+
 
 
 
@@ -123,6 +121,10 @@ app.use((req,res,next)=>{
 
 
 //home route
+app.get("/",async(req,res)=>{
+    const lists = await Listing.find();
+    res.render("listings/index.ejs",{lists});
+ });
 
  //listings
 app.use("/listings",listRoute);
