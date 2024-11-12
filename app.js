@@ -63,6 +63,11 @@ const sessionOptions={
     },
  };
 
+ app.get("/",async(req,res)=>{
+    const lists = await Listing.find();
+    res.render("listings/index.ejs",{lists});
+ });
+
 
 
 
